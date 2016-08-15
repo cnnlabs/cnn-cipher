@@ -2,6 +2,6 @@
     "name": "cnn-cipher",
     "version": "0.0.1",
     "main": [
-        "dist/cnn.cipher.js"
+        "dist/client/cnn.cipher.js"
     ]
 }

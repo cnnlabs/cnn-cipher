@@ -1,6 +1,6 @@
-# CNN cnn-cipher
+# CNN Cipher
 
-A module that builds graphql equeries.
+A module that builds graphql queries.
 
 ## Bower Installation
 
