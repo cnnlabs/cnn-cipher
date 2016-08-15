@@ -7,24 +7,26 @@ var path = require('path');
 module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
-    require('time-grunt')(grunt);
 
     grunt.initConfig({
 
-        jscs: {
-            /*
-             * You can generate this list with the following shell command:
-             * $ find . -name '*.js' | grep -v '\(node_modules\|.bower_components\|public\|tmp\)' | perl -ne 'if(/(^.*\/)/){print $1."\n"}' | sort -u
-             */
-            src: [
-                /* include */
-                '*.js',
-                'lib/**/*.js'
+        casper: {
+            test: {
+                options: {
+                    'fail-fast': true,
+                    test: true,
+                    verbose: true
+                },
+                files: {
+                    tests: 'test/casperjs/**/*.js'
+                }
+            }
+        },
 
-                /* exclude */
-            ],
-            options: {
-                reporter: require('jscs-stylish').path
+        copy: {
+            dist: {
+                src: 'src/client/cnn.cipher.js',
+                dest: 'dist/cnn.cipher.js'
             }
         },
 
@@ -37,7 +39,10 @@ module.exports = function (grunt) {
                 src: [
                     /* include */
                     '*.js',
-                    'lib/**/*.js'
+                    'lib/*.js',
+                    'lib/**/*.js',
+                    'test/*.js',
+                    'test/**/*.js'
                 ]
             },
             options: {
@@ -46,16 +51,34 @@ module.exports = function (grunt) {
             }
         },
 
-        jsonlint: {
-            files: {
-                src: [
-                    /* include */
-                    '*.json',
-                    '**/*.json',
+        jscs: {
+            /*
+             * You can generate this list with the following shell command:
+             * $ find . -name '*.js' | grep -v '\(node_modules\|.bower_components\|public\|tmp\)' | perl -ne 'if(/(^.*\/)/){print $1."\n"}' | sort -u
+             */
+            src: [
+                /* include */
+                '*.js',
+                'lib/*.js',
+                'lib/**/*.js',
+                'test/*.js',
+                'test/**/*.js'
 
-                    /* exclude */
-                    '!node_modules/**'
-                ]
+                /* exclude */
+            ],
+            options: {
+                reporter: require('jscs-stylish').path
+            }
+        },
+
+        uglify: {
+            options: {
+                mangle: true
+            },
+            target: {
+                files: {
+                    'dist/cnn.cipher.min.js': ['src/client/cnn.cipher.js']
+                }
             }
         }
 
@@ -64,6 +87,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'jscs',
         'jshint',
-        'jsonlint'
+        'copy',
+        'uglify'
     ]);
 };
