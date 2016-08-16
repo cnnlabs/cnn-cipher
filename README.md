@@ -2,6 +2,11 @@
 
 A module that builds graphql queries.
 
+## Why
+
+Creating client side graphql queries can be awkward and cumbersome. This module
+aims to help developers construct queries in a format that is familiar - JSON.
+
 ## Bower Installation
 
 ```shell
@@ -24,7 +29,7 @@ Cipher.createGraphQLQuery({
     params: [
         {
             name: 'param1',
-            value:'value1'
+            value: 'value1'
         }
     ],
     fields: [
