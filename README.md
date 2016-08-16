@@ -10,6 +10,12 @@ $ bower install cnn-cipher
 
 ## Example: Browser
 
+Download the script from dist and add it your public directory
+
+```
+<script src="your-public-root/cnn.ciper.min.js" async>
+```
+
 Invoke by passing in an object representing a query
 
 ```
