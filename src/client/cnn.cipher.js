@@ -21,7 +21,7 @@ function createQueryParams(params) {
 
     for (; i < params.length; i++) {
         param = params[i];
-        strArray[i] = `${param.name} :"${param.value}"`;
+        strArray[i] = param.name + ':"' + param.value + '"';
     }
     value = strArray.join();
 
@@ -49,9 +49,9 @@ function createQueryFields(fields) {
         fragment = field.fragment;
 
         if (fragment) {
-            strArray[i] = `${field.name} { ...${fragment} }`;
+            strArray[i] = field.name + '{ ...' + fragment + '}';
         } else if (isObject(field.values)) {
-            strArray[i] = `${field.name} { ${createQueryFields(field.values)} }`;
+            strArray[i] = field.name + '{' + createQueryFields(field.values) + '}';
         }
     }
     value = strArray.join();
@@ -69,14 +69,14 @@ function createFragments(fragments) {
         i = 0,
         name = '',
         strArray = [],
-        value ='';
+        value = '';
 
     for (; i < fragments.length; i++) {
         fragment = fragments[i];
         name = fragment.name;
         on = fragment.on;
 
-        strArray[i] = ` fragment ${name} on ${on} { ${createQueryFields(fragment.values)} } `;
+        strArray[i] = ' fragment ' + name + ' on ' + on + '{' + createQueryFields(fragment.values) + '} ';
     }
 
     value = strArray.join();
@@ -95,9 +95,9 @@ window.Cipher = window.Cipher || {
             fragments = createFragments(options.fragments) || '',
             value;
 
-        query[0] = `${name}(${params})`;
-        query[1] = `{${fields}}`;
-        query[2] = `${fragments}`;
+        query[0] = name + '(' + params + ')';
+        query[1] = '{' + fields + '}';
+        query[2] = fragments;
         value = query.join('');
 
         return value;

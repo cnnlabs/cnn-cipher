@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <title>CNN Cipher</title>
+        <script src="../../dist/cnn.cipher.min.js"></script>
+    </head>
+    <body>
+        <div style="max-width: 980px; margin: 0 auto;">
+            <span>Script Output:</span>
+            <div id="output" style="background: lightgray;">Hello</div>
+        </div>
+        <script>
+            var output = document.getElementById('output');
+
+            output.innerText = Cipher.createGraphQLQuery({
+                name: 'person',
+                params: [
+                    {
+                        name: 'param1',
+                        value: 'value1'
+                    }
+                ],
+                fields: [
+                    {
+                        name: 'head',
+                        values: [
+                            {
+                                name: 'eyes'
+                            },
+                            {
+                                name: 'nose'
+                            }
+                        ]
+                    },
+                    {
+                        name: 'heart'
+                    },
+                    {
+                        name: 'leftHand',
+                        fragment: 'handFragment'
+                    },
+                    {
+                        name: 'rightHand',
+                        fragment: 'handFragment'
+                    }
+                ],
+                fragments: [
+                    {
+                        name: 'fingerFragment',
+                        on: 'finger',
+                        values: [
+                            {
+                                name: 'proximalPhalanx'
+                            },
+                            {
+                                name: 'intermediatePhalanx'
+                            },
+                            {
+                                name: 'distalPhalanx'
+                            },
+                            {
+                               name: 'nail'
+                            }
+                        ]
+                    },
+                    {
+                        name: 'handFragment',
+                        on: 'hand',
+                        values: [
+                            {
+                                name:'thumb'
+                            },
+                            {
+                                name:'indexFinger',
+                                fragment: 'fingerFragment'
+                            },
+                            {
+                                name: 'middleFinger',
+                                fragment: 'fingerFragment'
+                            },
+                            {
+                                name: 'ringFinger',
+                                fragment: 'fingerFragment'
+                            },
+                            {
+                                name: 'pinkyFinger',
+                                fragment: 'fingerFragment'
+                            }
+                        ]
+                    }
+                ]
+            });
+        </script>
+    </body>
+</html>

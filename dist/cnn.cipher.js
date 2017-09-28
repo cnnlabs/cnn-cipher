@@ -1,7 +1,7 @@
 /*global window*/
 'use strict';
 
-function isObject (obj) {
+function isObject(obj) {
     return (typeof obj === 'object' && obj !== null) ? true : false;
 }
 
@@ -10,7 +10,7 @@ function isObject (obj) {
  * @param {array} params
  * @return {string} value - string of name value pairs
  */
-function createQueryParams (params) {
+function createQueryParams(params) {
     if (!Array.isArray(params)) {
         return params;
     }
@@ -33,22 +33,52 @@ function createQueryParams (params) {
  * @param {array} fields
  * @return {string} value - string of name values
  */
-function createQueryFields (fields) {
+function createQueryFields(fields) {
     if (!Array.isArray(fields)) {
         return fields;
     }
     var field,
         strArray = [],
         value = '',
-        i = 0;
+        i = 0,
+        fragment = '';
 
     for (; i < fields.length; i++) {
         field = fields[i];
         strArray[i] = field.name;
-        if (isObject(field.values)) {
+        fragment = field.fragment;
+
+        if (fragment) {
+            strArray[i] = field.name + '{ ...' + fragment + '}';
+        } else if (isObject(field.values)) {
             strArray[i] = field.name + '{' + createQueryFields(field.values) + '}';
         }
     }
+    value = strArray.join();
+
+    return value;
+}
+
+function createFragments(fragments) {
+    if (!Array.isArray(fragments)) {
+        return fragments;
+    }
+
+    var fragment,
+        on = '',
+        i = 0,
+        name = '',
+        strArray = [],
+        value = '';
+
+    for (; i < fragments.length; i++) {
+        fragment = fragments[i];
+        name = fragment.name;
+        on = fragment.on;
+
+        strArray[i] = ' fragment ' + name + ' on ' + on + '{' + createQueryFields(fragment.values) + '} ';
+    }
+
     value = strArray.join();
 
     return value;
@@ -62,11 +92,12 @@ window.Cipher = window.Cipher || {
             name = options.name,
             params = createQueryParams(options.params) || '',
             fields = createQueryFields(options.fields) || '',
+            fragments = createFragments(options.fragments) || '',
             value;
 
         query[0] = name + '(' + params + ')';
         query[1] = '{' + fields + '}';
-
+        query[2] = fragments;
         value = query.join('');
 
         return value;
