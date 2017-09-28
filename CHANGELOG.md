@@ -1,5 +1,23 @@
 # CNN Cipher Changelog
 
+## 2017-09-28, Version 0.2.0, @adslaton
+
+### Notable changes
+
+- Add fragments support
+
+### Known issues
+
+See https://github.com/cnnlabs/cnn-hapi/labels/defect for complete and
+current list of known issues.
+
+### Commits
+
+* [[`6d24f85ff6`](https://github.com/cnnlabs/cnn-cipher/commit/6d24f85ff6)] - Merge pull request #4 from tombrake/feature/fragments (A.D. Slaton)
+* [[`2de03fffb8`](https://github.com/cnnlabs/cnn-cipher/commit/2de03fffb8)] - Update package.json (Tom)
+* [[`0a7869bdef`](https://github.com/cnnlabs/cnn-cipher/commit/0a7869bdef)] - - better Fragment example in README (Tom Brake)
+* [[`7824eb3efc`](https://github.com/cnnlabs/cnn-cipher/commit/7824eb3efc)] - - converted string concatenation to use template literals (Tom Brake)
+
 ## 2016-08-12, Version 0.1.0, @adslaton
 
 ### Notable changes
