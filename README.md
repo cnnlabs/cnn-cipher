@@ -80,9 +80,24 @@ Cipher.createGraphQLQuery({
             on: 'hand', 
             values: [
                 { 
-                    name:'fingers',
+                    name:'thumb'
+                },
+                { 
+                    name:'indexFinger',
                     fragment: 'fingerFragment'
-                }
+                }, 
+                { 
+                    name: 'middleFinger',
+                    fragment: 'fingerFragment'
+                },
+                { 
+                    name: 'ringFinger',
+                    fragment: 'fingerFragment'
+                },
+                { 
+                    name: 'pinkyFinger',
+                    fragment: 'fingerFragment'
+                },
             ]
         }
     ]
@@ -92,7 +107,7 @@ Cipher.createGraphQLQuery({
 Returned value
 
 ```
-"person(param1 :"value1"){head { eyes,nose },heart,leftHand { ...handFragment },rightHand { ...handFragment }} fragment fingerFragment on finger { proximalPhalanx,intermediatePhalanx,distalPhalanx,nail } , fragment handFragment on hand { fingers { ...fingerFragment } } "
+"person(param1 :"value1"){head { eyes,nose },heart,leftHand { ...handFragment },rightHand { ...handFragment }} fragment fingerFragment on finger { proximalPhalanx,intermediatePhalanx,distalPhalanx,nail } , fragment handFragment on hand { thumb,indexFinger { ...fingerFragment },middleFinger { ...fingerFragment },ringFinger { ...fingerFragment },pinkyFinger { ...fingerFragment } } "
 ```
 
 ## Contributing
